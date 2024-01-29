@@ -19,6 +19,13 @@ app.get("/youtube", (req, res) => {
   res.send("Chai or Code");
 });
 
+app.get("/github-profile", async (req, res) => {
+  const url = "https://api.github.com/users/mustafazuberi";
+  fetch(url)
+    .then((dataJson) => dataJson.json().then((data) => res.send(data)))
+    .catch((err) => res.send(err.message));
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

@@ -1,4 +1,9 @@
 require("dotenv").config();
+
+if(!process.env.PORT) {
+    throw new Error("PORT is missing in environment variables.");
+}
+
 const express = require("express");
 const cors = require("cors");
 const app = express();

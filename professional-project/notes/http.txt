@@ -1,0 +1,192 @@
+Beginner Notes on HTTP, Headers, Metadata, and HTTPS
+
+🌐 What is HTTP?
+
+HTTP stands for HyperText Transfer Protocol.
+
+It is a set of rules used for communication between a client (browser) and a server over the web.
+
+HTTP is mainly used to send and receive data between your computer and websites.
+
+Analogy:
+HTTP is like a waiter taking your order (request) to the kitchen (server) and bringing food (response) back to you.
+
+📦 What is Sent in an HTTP Request?
+
+When a browser (or client) sends a request to a server, it sends extra information to help the server understand the request.
+That extra information is called HTTP Headers.
+
+🏷️ What Are HTTP Headers?
+
+Headers are extra details (also called metadata) sent with a request or response.
+
+They are in key-value format.
+
+Example:
+
+Content-Type: application/json
+Authorization: Bearer 123456
+
+So yes:
+
+HTTP headers are metadata.
+
+Metadata means "data about data".
+
+In the HTTP world, headers are a type of metadata.
+
+🔁 Headers in Request vs Response
+
+Headers exist in both requests (from client) and responses (from server).
+
+Request Headers (sent by client):
+
+Content-Type: Format of the data being sent (e.g. JSON)
+
+Accept: Format client wants in return
+
+Authorization: Authentication info (like a token)
+
+User-Agent: Info about the browser or client
+
+Response Headers (sent by server):
+
+Content-Type: Format of response (e.g. JSON, HTML)
+
+Set-Cookie: Server setting a cookie for the client
+
+Cache-Control: Caching instructions
+
+Content-Length: Size of the content being returned
+
+🧩 Representation Headers
+
+These give details about the body content (the actual data).
+
+Tell the browser how to decode or understand the content.
+
+Examples:
+
+Content-Type: Data type (e.g. application/json, text/html)
+
+Content-Encoding: If the content is compressed (e.g. gzip)
+
+Content-Language: Language of the content (e.g. en-US)
+
+These are helpful when dealing with compression or different data formats.
+
+📤 What is Payload?
+
+Payload = The actual data being sent (e.g. a user object, userId, message, etc.).
+
+It’s usually in the body of the request or response.
+
+Examples:
+
+Deleting a user (in DELETE request):
+{
+"userId": "12345"
+}
+
+Creating a user (in POST request):
+{
+"name": "John",
+"email": "john@example.com"
+}
+
+The server might respond with the created user in the response payload.
+
+📌 Summary of Key Terms
+
+HTTP: A protocol to send/receive data over the internet
+Headers: Extra info sent with request/response in key-value pairs
+Metadata: Data about data – headers are a type of metadata
+Representation Headers: Describe the content (type, encoding, language)
+Payload: Actual data being sent in body (e.g. user info)
+Payload Headers: Headers describing the payload (e.g. Content-Length)
+
+🔐 What is the Difference Between HTTP and HTTPS?
+
+HTTP = Not secure
+HTTPS = Secure and encrypted
+
+HTTP does not encrypt data. It’s like sending a message on a postcard — anyone can read it.
+HTTPS encrypts the data using SSL/TLS. It’s like sending a locked box — only the receiver can unlock and read it.
+
+HTTPS uses encryption to:
+
+Hide your data from hackers
+
+Protect sensitive information like passwords and card numbers
+
+Prevent data from being changed in the middle
+
+HTTPS websites also show a padlock 🔒 in the browser and start with https:// in the URL.
+
+Why HTTPS is important:
+
+Required for login forms and payment systems
+
+Protects user data
+
+Even improves your ranking in Google
+
+💡 You can test this in your browser:
+Open Developer Tools → Network tab → See whether requests are going to http or https.
+
+
+***********
+
+
+BANDWIDTH:-
+Its like the size of a water pipe that carries data (like pictures or videos) over the internet. A bigger pipe (more bandwidth) lets more data flow faster, while a smaller pipe makes things slower. Backend engineers care about bandwidth because they want to make sure everything loads quickly and smoothly for users.
+Bandwidth is like the capacity of your internet connection — the more bandwidth, the faster and more data you can send.
+
+
+***********
+
+
+HTTP METHODS:
+
+GET: retreive a resourse.
+
+HEAD: The HEAD method in HTTP is used to check if a product or resource exists on a server without actually downloading the details. For example, if you want to know whether a product with ID 12345 exists, you can send a HEAD request to the server (like HEAD /products/12345). The server will respond with only the headers and not the product details. If the product exists, the server will return a 200 OK response, indicating the product is available. If the product doesn’t exist, it will return a 404 Not Found response. This method is faster and more efficient because it saves bandwidth, as you're only checking if the resource exists rather than downloading all the content.
+More data = more bandwidth needed.
+HEAD method = less data = less bandwidth needed
+
+
+TRACE: (mostly used for debugging)
+The TRACE method is used to check what is happening to your request as it travels to the server. It sends back the same request you sent, so you can see if anything is being changed or added along the way. For example, if you send TRACE /example to the server, it might respond with the exact request it received, showing the path and any changes made.
+
+OPTIONS:
+The OPTIONS method tells you what actions or methods (like GET, POST, PUT) are allowed on a specific server or resource. For example, if you send OPTIONS /products, the server might respond with something like: Allow: GET, POST, DELETE, meaning you can use those methods on the /products resource. It’s a way of asking the server what you can do with it.
+
+PUT: it replace the existing object
+PATCH: used for request which edits specific part of object
+
+
+
+**************
+
+
+HTTP Status Codes:-
+
+- 1xx = information
+- 2xx = success
+- 3xx = redirection
+- 4xx = client error
+- 5xx = server error
+
+100= continue
+102= processing (lets say if sending reposnse is taking time so just for better experience we send it to client that    under processing)
+200= OK
+201= Created
+202= Accepted
+307= temporary redirect
+308= permanent redirect
+400= bad request
+401= unauthorized
+402= payment required
+404= not found
+500= internal server error
+504= gateway timeout
